@@ -4,8 +4,6 @@
 
 # Write a python program that can print the user's initials in ASCII Art block Letters
 
-# Hard code first initial to test that the renderLetter function works
-firstInitial = "Q"
 
 # =====================================================
 # Store each line of the alphabet into a dictionary.
@@ -406,26 +404,58 @@ seventhline = {
 
 
 
+def get_user_initials():
+  while True:
+    try:
+      s = str(input("Please enter your intitials: "))
+      if s.isalpha():
+
+        break
+      else:
+        raise TypeError
+    except TypeError:
+        print("Plese use only letters.")
+        continue
+    except EOFError:
+        print("Please enter something")
+        continue
+  return s
+
 
 # Define renderLetter Function
 ''' Given the provided initial(s), print each line to the console.
     Since console prints line-by-line, concatenating individual lines for each block letter and printing them vertically
     is the best solution I've come up with so far.'''
 
-''' Current state can take one alphabetical character and retrieve the value from dictionary.'''
-def renderLetter(l):
-  initial = l.upper()
-  line1 = firstline.get(initial)
-  line2 = secondline.get(initial)
-  line3 = thirdline.get(initial)
-  line4 = fourthline.get(initial)
-  line5 = fifthline.get(initial)
-  line6 = sixthline.get(initial)
-  line7 = seventhline.get(initial)
+def render_letters(s):
+  su = s.upper()
+  line1 = ""
+  line2 = ""
+  line3= ""
+  line4 = ""
+  line5= ""
+  line6= ""
+  line7 = ""
+  for i in su:
+    line1 += firstline.get(i) + "   "
+    line2 += secondline.get(i) + "   "
+    line3 += thirdline.get(i) + "   "
+    line4 += fourthline.get(i) + "   "
+    line5 += fifthline.get(i) + "   "
+    line6 += sixthline.get(i) + "   "
+    line7 += seventhline.get(i) + "   "
   wholeLetter = line1 + "\n" + line2 + "\n" + line3 + "\n" + line4 + "\n" + line5 + "\n" + line6 + "\n" + line7
   print(wholeLetter)
   # End renderLetter function
 
 # Call renderLetter function.
 
-renderLetter(firstInitial)
+def main():
+  userIn = get_user_initials()
+  render_letters(userIn)
+
+ # render_letters(firstInitial)
+
+
+#Call Main
+main()
